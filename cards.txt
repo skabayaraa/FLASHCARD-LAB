@@ -1,0 +1,3 @@
+Java|Жава
+Maven|Мэйвен
+Interface|Интерфейс
