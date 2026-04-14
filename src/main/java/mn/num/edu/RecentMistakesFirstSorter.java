@@ -1,4 +1,5 @@
 package mn.num.edu;
+
 import java.util.*;
 
 public class RecentMistakesFirstSorter implements CardOrganizer {
@@ -11,6 +12,7 @@ public class RecentMistakesFirstSorter implements CardOrganizer {
             if (card.isLastAttemptWrong()) wrongOnes.add(card);
             else others.add(card);
         }
+
         cards.clear();
         cards.addAll(wrongOnes);
         cards.addAll(others);
