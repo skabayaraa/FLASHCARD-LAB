@@ -1,4 +1,5 @@
 package mn.num.edu;
+
 import java.util.List;
 
 public interface CardOrganizer {

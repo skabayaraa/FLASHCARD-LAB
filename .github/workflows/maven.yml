@@ -1,0 +1,24 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "main" ]  # Хэрэв таны үндсэн branch "master" бол master гэж солино
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3  # Таны кодыг сервер дээр татаж авна
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3  # Java 17-г суулгана
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml  # Maven-ээр кодыг compile хийж шалгана
