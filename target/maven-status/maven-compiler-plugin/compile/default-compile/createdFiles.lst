@@ -2,3 +2,4 @@ mn\num\edu\CardOrganizer.class
 mn\num\edu\Card.class
 mn\num\edu\RecentMistakesFirstSorter.class
 mn\num\edu\Main.class
+mn\num\edu\WorstFirstSorter.class

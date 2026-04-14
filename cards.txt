@@ -1,60 +1,40 @@
-# Java үндсэн ойлголтууд
-class | классын тодорхойлолт
-interface | интерфейс
-extends | удамшуулах
-implements | хэрэгжүүлэх
-abstract | хийсвэр
-static | статик
-final | өөрчлөгдөхгүй
-void | буцаах утгагүй
-null | хоосон утга
-this | одоогийн объект
+class|todorhoilolt
+interface|interface
+extends|udamshil
+implements|heregjuuleh
+abstract|hiisver
+static|static
+final|uurchluhgui
+void|hooson
+null|null
 
-# Хандалтын өөрчлөгч
-public | бүгдэд нээлттэй
-private | зөвхөн дотоодод
-protected | удамлагчид нээлттэй
-default | нэг package-д нээлттэй
+public|neelttei
+private|nuuts
+protected|hamgaalalt
+default|bagts
+if|nuhstul
+else|esvel
+for|davtalt
+while|davtalt
+switch|songolt
+break|taslah
+continue|urgeljluuleh
+return|butsaah
+ArrayList|massive
+LinkedList|jagsaalt
 
-# Хяналтын бүтэц
-if | нөхцөл шалгах
-else | нөхцөл биелэхгүй бол
-for | тоолуур давтан
-while | нөхцөлт давтан
-switch | олон нөхцөл шалгах
-break | давталтаас гарах
-continue | дараагийн давталт руу үсрэх
-return | утга буцаах
-
-# Өгөгдлийн бүтэц
-ArrayList | динамик массив
-LinkedList | холбоост жагсаалт
-HashMap | түлхүүр-утга хосолсон бүтэц
-HashSet | давтагдахгүй элементийн цуглуулга
-Stack | дэс дараалал - сүүлийнх эхэлж гарна
-Queue | дэс дараалал - эхнийх эхэлж гарна
-
-# Exception
-try | алдаа барих оролдлого
-catch | алдааг барих
-finally | заавал гүйцэтгэх блок
-throw | алдаа шиддэг
-throws | алдаа шидэж болохыг зарлах
-Exception | алдааны ерөнхий класс
-RuntimeException | гүйцэтгэлийн алдаа
-
-# OOP
-encapsulation | нэгтгэл - мэдээллийг нуух
-inheritance | удамшил
-polymorphism | олон хэлбэрт байдал
-abstraction | хийсвэрлэл
-
-# Utility
-Math.max | хамгийн том утгыг буцаана
-Math.min | хамгийн бага утгыг буцаана
-Math.abs | үнэмлэхүй утгыг буцаана
-String.length | мөрийн урт
-String.substring | мөрийн дэд хэсэг
-String.split | мөрийг хуваах
-String.trim | хоосон зайг арилгах
-Integer.parseInt | мөрийг тоо болгох
+Stack|stack
+Queue|queue
+try|shalgah
+catch|barih
+finally|guitsetgeh
+throw|shideh
+Exception|aldaa
+inheritance|udamshil
+polymorphism|helber
+abstraction|hiisverlel
+length|urt
+substring|heseg
+split|huvaah
+trim|zai
+parseInt|too

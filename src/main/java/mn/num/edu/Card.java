@@ -5,7 +5,6 @@ public class Card {
     private final String answer;
     private int correctStreak  = 0;  // Дараалсан зөв хариултын тоо
     private int totalAttempts  = 0;  // Нийт оролдлогын тоо
-    private int totalCorrect   = 0;  // Нийт зөв хариултын тоо
     private int totalWrong     = 0;  // Нийт буруу хариултын тоо
     private boolean lastAttemptWrong = false;
 
@@ -18,15 +17,20 @@ public class Card {
     public String getAnswer()   { return answer; }
     public int getCorrectStreak()  { return correctStreak; }
     public int     getTotalAttempts()   { return totalAttempts; }
-    public int     getTotalCorrect()    { return totalCorrect; }
+    
     public int     getTotalWrong()      { return totalWrong; }
     public boolean isLastAttemptWrong() { return lastAttemptWrong; }
 
+
+    // Энэ функцийг заавал нэмээрэй (Main.java-д хэрэгтэй байгаа)
+    public int getTotalCorrect() {
+        return totalAttempts - totalWrong;
+    }
+    
     public void recordAttempt(boolean isCorrect) {
         totalAttempts++;
         if (isCorrect) {
             correctStreak++;
-            totalCorrect++;
             lastAttemptWrong = false;
         } else {
             correctStreak = 0;

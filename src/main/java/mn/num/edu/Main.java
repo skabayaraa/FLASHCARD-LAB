@@ -1,22 +1,24 @@
 package mn.num.edu;
 
-import org.apache.commons.cli.*;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.ParseException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
-        // 1. Консол руу Монгол үсэг зөв хэвлэх тохиргоо
-        try {
-            System.setOut(new PrintStream(System.out, true, "UTF-8"));
-        } catch (UnsupportedEncodingException ignored) {}
+        // Encoding asuudlaas sergiilj zuvhun Latin usguud ashiglav.
 
-        // 2. Командын мөрийн тохиргоо
+        // 1. Command line options
         Options options = new Options();
-        options.addOption("h", "help",        false, "Тусламжийн мэдээлэл харуулах");
-        options.addOption("o", "order",        true, "Зохион байгуулалт: random, recent-mistakes-first, worst-first");
-        options.addOption("r", "repetitions",  true, "Нэг картыг хэдэн удаа зөв хариулахыг тохируулах");
-        options.addOption("i", "invertCards", false, "Асуулт, хариултыг сольж харуулна");
+        options.addOption("h", "help",         false, "Tuslamjiin medeelel haruulah");
+        options.addOption("o", "order",        true,  "Erembeleh: random, recent-mistakes-first, worst-first");
+        options.addOption("r", "repetitions",  true,  "Neg kartiig heden udaa zuv hariulah (target repetitions)");
+        options.addOption("i", "invertCards", false, "Asuult, hariultiig solij haruulah");
 
         try {
             CommandLine cmd = new DefaultParser().parse(options, args);
@@ -28,14 +30,14 @@ public class Main {
 
             String[] remainingArgs = cmd.getArgs();
             if (remainingArgs.length == 0) {
-                System.out.println("Алдаа: Cards-file-ын замыг зааж өгнө үү.");
+                System.out.println("ALDAA: Cards-file-iin zamiig zaaj ugnu uu.");
                 return;
             }
 
             runSession(cmd, remainingArgs[0]);
 
         } catch (ParseException e) {
-            System.out.println("Тушаал буруу байна: " + e.getMessage());
+            System.out.println("Tushaal buruu baina: " + e.getMessage());
         }
     }
 
@@ -49,9 +51,10 @@ public class Main {
 
         Set<String> earnedAchievements = new HashSet<>();
 
-        try (Scanner scanner = new Scanner(System.in, "UTF-8")) {
+        // Scanner-iig standart encoding-oor ashiglav
+        try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
-                // Карт зохион байгуулалт
+                // Kart zohion baiguulalt (Sorting)
                 switch (order.toLowerCase()) {
                     case "recent-mistakes-first" -> new RecentMistakesFirstSorter().organize(deck);
                     case "worst-first"           -> new WorstFirstSorter().organize(deck);
@@ -76,34 +79,34 @@ public class Main {
                     card.recordAttempt(isCorrect);
 
                     if (isCorrect) {
-                        System.out.println("Зөв!");
+                        System.out.println("Zuv!");
                     } else {
-                        System.out.println("Буруу! Хариулт: " + correctAnswer);
+                        System.out.println("Buruu! Hariult: " + correctAnswer);
                         currentRoundPerfect = false;
                     }
 
                     checkIndividualAchievements(card, earnedAchievements);
                 }
 
-                // CORRECT амжилт: тойрогт бүх карт зөв
+                // CORRECT achievement
                 if (currentRoundPerfect && !deck.isEmpty() && earnedAchievements.add("CORRECT")) {
-                    System.out.println(">>> АМЖИЛТ: CORRECT (Сүүлийн тойрогт бүх карт зөв!)");
+                    System.out.println(">>> AMJILT: CORRECT (Suuliin toirogt buh kart zuv!)");
                 }
 
                 if (isAllFinished) break;
             }
         }
-        System.out.println("\nБаяр хүргэе! Сургалт амжилттай дууслаа.");
+        System.out.println("\nBayar hurgeye! Surgalt amjilttai duuslaa.");
     }
 
     private static void checkIndividualAchievements(Card card, Set<String> earned) {
-        // REPEAT: Нэг картад нийт 5-аас олон удаа хариулсан
+        // REPEAT achievement
         if (card.getTotalAttempts() > 5 && earned.add("REPEAT")) {
-            System.out.println(">>> АМЖИЛТ: REPEAT (Нэг картыг 5-аас олон удаа оролдлоо)");
+            System.out.println(">>> AMJILT: REPEAT (Neg kartiig 5-aas olon udaa oroldloo)");
         }
-        // CONFIDENT: Нэг картад нийт дор хаяж 3 удаа зөв хариулсан
+        // CONFIDENT achievement
         if (card.getTotalCorrect() >= 3 && earned.add("CONFIDENT")) {
-            System.out.println(">>> АМЖИЛТ: CONFIDENT (Нэг картыг нийт 3 удаа зөв хариуллаа)");
+            System.out.println(">>> AMJILT: CONFIDENT (Neg kartiig niit 3 udaa zuv hariullaa)");
         }
     }
 
@@ -112,11 +115,11 @@ public class Main {
         File file = new File(path);
 
         if (!file.exists()) {
-            System.out.println("Алдаа: " + path + " файл олдсонгүй.");
+            System.out.println("ALDAA: " + path + " fail oldsongui.");
             return list;
         }
 
-        try (Scanner fs = new Scanner(file, "UTF-8")) {
+        try (Scanner fs = new Scanner(file)) {
             while (fs.hasNextLine()) {
                 String line = fs.nextLine().trim();
                 if (line.contains("|")) {
@@ -127,7 +130,7 @@ public class Main {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Файл уншихад алдаа гарлаа: " + e.getMessage());
+            System.out.println("Fail unshihad aldaa garlaa: " + e.getMessage());
         }
         return list;
     }
